@@ -1,0 +1,28 @@
+* {
+	font-size: 30px;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+
+}
+
+#output, #input {
+	padding: 20px;
+}
+
+#output {
+	position: absolute;
+	width: 100%;
+	height: 85%;
+	background: grey;
+}
+
+#input {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 15%;
+	background: pink;
+}
