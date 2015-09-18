@@ -1,9 +1,3 @@
-var PlayerName = "Bob";
-var PlayerRace = "Human";
-
-var PlayerStrenth = 10;
-var PlayerAgility = 5;
-
 state = {
 	character: {
 		name: "",
@@ -13,7 +7,8 @@ state = {
 			agility: 0
 		}
 	},
-	location: "inside"
+	location: "inside",
+	inputCallback: false
 }
 
 output = function(text) {
@@ -33,43 +28,31 @@ commands = {
 	}
 }
 
+askForInput = function(message, callback) {
+	output(message);
+	state.inputCallback = callback;
+}
+
 evaluateInput = function(input) {
+	if (state.inputCallback) {
+		callback = state.inputCallback;
+		state.inputCallback = false;
+		callback();
+		return;
+	}
+
 	command = input.split(" ")[0];
 
 	if (command in commands) {
 		commands[command](input);
 		return;
+	} else {
+		output('Invalid command. (super helpful amirite)');
 	}
 
 	if (input.indexOf('move') == 0) {
 
 	}
-
-	//started messing around with adding a name and race. Works
-	if (input.indexOf('my name is') == 0)
-		{
-			NewName = input.substr(10);
-			if (NewName !== "")
-			{
-				output('your new name is ' + NewName)
-				PlayerName = NewName;
-			}
-		}
-
-	if (input.indexOf('my race is') == 0)
-		{
-			NewRace = input.substr(10);
-			if (NewRace !== "")
-			{
-				output('your new race is ' + NewRace)
-				PlayerRace = NewRace;
-			}
-		}
-
-	if (input.indexOf('info') == 0)
-		{
-			output("Name: "+ PlayerName + '<br>' + "Race: " + PlayerRace);
-		}
 }
 
 // Register input
@@ -80,20 +63,7 @@ $('#input').keypress(function(e) {
 	}
 });
 
-// vvvv fucking actual content I guess vvvv
-PlayerInfo = {
-	Info: {
-		Name: PlayerName,
-		Race: PlayerRace,
-		//Add more shit here
-
-	},
-	Stats: {
-		Strength: PlayerStrenth,
-		Agility: PlayerAgility,
-		//and here
-	}
-}
+// Content
 
 locations = {
 	inside: {
@@ -101,7 +71,7 @@ locations = {
 		description: "The inside of the House",
 		visits: 0,
 		onEnter: function() {
-			console.log('went inside house');
+			locations.inside.visits++
 		},
 		onLook: function() {
 			output('there are like chairs and shit idk');
@@ -118,7 +88,16 @@ locations = {
 }
 
 startGame = function() {
-	output("set ur name using `name [urfuckingname]`");
+	askForInput("wats ur name m0", function(input) {
+		state.name = input;
+
+		askForInput("wat ur race tho", function(input) {
+			state.race = input;
+
+			output('okay cool look ur in a house wat next');
+		});
+	});
 }
 
 startGame();
+
