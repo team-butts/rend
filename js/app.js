@@ -14,6 +14,7 @@ state = {
 
 output = function(text) {
 	$('#output').append(text + '<br>');
+	$('#output')[0].scrollTop = $('#output')[0].scrollHeight;
 }
 
 commands = {
