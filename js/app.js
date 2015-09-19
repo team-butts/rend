@@ -7,6 +7,7 @@ state = {
 			agility: 0
 		}
 	},
+	itemsHeld: [],
 	currentLocation: "inside",
 	inputCallback: false
 }
