@@ -7,7 +7,7 @@ state = {
 			agility: 0
 		}
 	},
-	location: "inside",
+	currentlocation: "inside",
 	inputCallback: false
 }
 
@@ -18,14 +18,20 @@ output = function(text) {
 commands = {
 	move: function(input) {
 		newLocation = input.substr(5);
-		if (newLocation in locations) {
+		if (newLocation == state.currentlocation)
+			{
+				output("You are already in here.")
+			}
+		else if (newLocation in locations) {
 			output('moved to ' + newLocation);
 			locations[newLocation].onEnter();
+			state.currentlocation = newLocation;
 		}
 	},
 	look: function(input) {
 		locations[state.location].onLook();
-	}
+	},
+
 }
 
 askForInput = function(message, callback) {
@@ -65,6 +71,8 @@ $('#input').keypress(function(e) {
 
 // Content
 
+
+
 locations = {
 	inside: {
 		name: "Inside the House",
@@ -83,6 +91,7 @@ locations = {
 		visits: 0,
 		onEnter: function() {
 			console.log('went outside house');
+			locations.outside.visits++
 		}
 	}
 }
@@ -97,6 +106,8 @@ startGame = function() {
 			output('okay cool look ur in a house wat next');
 		});
 	});
+
+
 }
 
 startGame();
