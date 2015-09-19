@@ -7,7 +7,7 @@ state = {
 			agility: 0
 		}
 	},
-	currentlocation: "inside",
+	currentLocation: "inside",
 	inputCallback: false
 }
 
@@ -18,18 +18,18 @@ output = function(text) {
 commands = {
 	move: function(input) {
 		newLocation = input.substr(5);
-		if (newLocation == state.currentlocation)
+		if (newLocation == state.currentLocation)
 			{
-				output("You are already in here.")
+				output("You are already here.")
 			}
 		else if (newLocation in locations) {
 			output('moved to ' + newLocation);
 			locations[newLocation].onEnter();
-			state.currentlocation = newLocation;
+			state.currentLocation = newLocation;
 		}
 	},
 	look: function(input) {
-		locations[state.location].onLook();
+		locations[state.currentLocation].onLook();
 	},
 
 }
@@ -43,7 +43,7 @@ evaluateInput = function(input) {
 	if (state.inputCallback) {
 		callback = state.inputCallback;
 		state.inputCallback = false;
-		callback();
+		callback(input);
 		return;
 	}
 
@@ -97,17 +97,18 @@ locations = {
 }
 
 startGame = function() {
-	askForInput("wats ur name m0", function(input) {
-		state.name = input;
+	askForInput("Please provide your name.", function(input) {
+		console.log(input);
 
-		askForInput("wat ur race tho", function(input) {
-			state.race = input;
+		state.character.name = input;
+		output('Hello, ' + state.character.name + '.');
 
-			output('okay cool look ur in a house wat next');
+		askForInput("What race do you belong to? [human|elf|dwarf]", function(input) {
+			state.character.race = input;
+
+			output('You are in a small house. What next?');
 		});
 	});
-
-
 }
 
 startGame();
