@@ -4,20 +4,22 @@ locations = {
 		name: "Example location",
 		description: "A description",
 		coordinates: {
-			x: 0,
+			x: -1,
 			y: 0
 		},
 		visits: 0,
 		onEnter: function() {
 			// write an explanation of what should happen when you arrive here, we'll make code for it later
+			output('welcome to debugville!');
 		}
 		onLook: function() {
 			// describe what the player would see if they were like "wtf is here"
+			output('console output, console output everywhere');
 		}
 
 		// any other details you can provide, put them here
 	}
-}exampleLocation: {
+	home: {
 		name: "Home",
 		description: "Sweet Home",
 		coordinates: {
@@ -27,50 +29,73 @@ locations = {
 		visits: 0,
 		onEnter: function() {
 			// Beginning area, safe zone, chests, exit to dirt path. After a stormy night the character decides to check on his/her sister who lives on the other side of the city.
+			output('Home sweet home!');
 		}
 		onLook: function() {
+			output('You scan your home. There is a [chest] nearby, along with a [bed].');
 			// The character's home, a small shack on the edge of the city. There are chests with some basic equipment and survival items lying around and a place to rest to restore health/stamina.
+		}
+		staticItems: {
+			bed: {
+				name: "Bed",
+				description: "A comfy place to rest.",
+				onUse: function() {
+					state.character.currentHealth = state.character.stats.maxHealth;
+					output('You rest a while, and regain energy.');
+				}
+			}
 		}
 
 		// Beginning area, leads to Dirt Path zone
 	}
-}exampleLocation: {
+	dirtpath: {
 		name: "Dirt Path",
 		description: "Preferable to the broken glass path",
 		coordinates: {
-			x: 0,
+			x: 1,
 			y: 0
 		},
-		visits: 0,
+		state: {
+			creatureDefeated: false,
+			visits: 0,
+		},
 		onEnter: function() {
 			// Encounters strange creature, battle tutorial
+			output('A strange [slime] creature blocks your path. You\'re probably going to have to [battle] it.')
 		}
 		onLook: function() {
+			if (locations.dirtpath.state.creatureDefeated) {
+				output('Thick foliage covers either side of the path, but the way to the [citygate] is clear.');
+			} else {
+				output('The [slime] creature is still sitting there, waiting for you to [battle] it.')
+			}
 			// A path that leads to the city. With thick foliage on either side, forward is the only way to go.
 		}
 
 		// Arrives from Home area, leads to City Gate.
 	}
-}exampleLocation: {
+	citygate: {
 		name: "City Gate"
 		description: "A gate to the city"
 		coordinates: {
-			x: 0,
-			y: 0
+			x: 1,
+			y: 1
 		},
 		visits: 0,
 		onEnter: function() {
 			// Arrives to find the Gate Closed and the area deserted, requires key to enter city. 
+			output('You arrive at the gate, only to find the area deserted and the gate locked. You will probably need to source a [key] to gain access to the city.')
 		}
 		onLook: function() {
 			// The city walls loom ominously against the dark sky. Normally a bustling area with merchants and knights coming and going, it is all to quiet. A guard tower stands quietly to the right of the gate.
+			output('The city walls loom ominously against the dark sky. Normally a bustling area with merchants and knights coming and going, it is eerily quiet. A [guardtower] sits to the right of the gate.')
 		}
 
 		// Arrives from Dirt Path area. Leads to City Square (once gate key is aquired) and Guard Tower.
 	}
-}exampleLocation: {
+	guardtower: {
 		name: "Guard Tower"
-		description: "Knee injury's not a problem!"
+		description: "Knee injuries not a problem!"
 		coordinates: {
 			x: 0,
 			y: 0
@@ -85,7 +110,7 @@ locations = {
 
 		// Arrives from City Gate, Leads to Guard Tower Roof area
 	}
-}exampleLocation: {
+	guardtower-roof: {
 		name: "Guard tower Roof"
 		description: "Lovely view"
 		coordinates: {
@@ -101,328 +126,5 @@ locations = {
 		}
 
 		// Arrives from Guard Tower
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
-	}
-}exampleLocation: {
-		name: "Example location",
-		description: "A description",
-		coordinates: {
-			x: 0,
-			y: 0
-		},
-		visits: 0,
-		onEnter: function() {
-			// write an explanation of what should happen when you arrive here, we'll make code for it later
-		}
-		onLook: function() {
-			// describe what the player would see if they were like "wtf is here"
-		}
-
-		// any other details you can provide, put them here
 	}
 }
