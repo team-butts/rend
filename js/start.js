@@ -7,8 +7,8 @@ state = {
 			agility: 0
 		}
 	},
-	itemsHeld: [],
-	currentLocation: "inside",
+	itemsHeld: ['bluntsword'],
+	currentLocation: "home",
 	inputCallback: false
 }
 
@@ -28,7 +28,19 @@ commands = {
 	look: function(input) {
 		locations[state.currentLocation].onLook();
 	},
+	inspect: function(input) {
+		// grab the name provided (shouldn't have spaces so swt)
+		itemName = input.split(' ')[1];
 
+		// find the item
+		if (state.itemsHeld.indexOf(itemName) >= 0) {
+			items[itemName].onInspect();
+		} else if (locations[state.currentLocation].staticItems[itemName]) {
+			locations[state.currentLocation].staticItems[itemName].onInspect();
+		} else {
+			output('No idea what you\'re referring to.');
+		}
+	},
 }
 
 // Register input

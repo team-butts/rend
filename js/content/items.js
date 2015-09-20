@@ -13,7 +13,7 @@ items = {
 
 		// any other details you can provide, put them here
 	},
-	exampleItem: {
+	weakhealthpotion: {
 		name: "Weak Healing Potion",
 		description: "Red Soda",
 		visits: 0,
@@ -26,7 +26,7 @@ items = {
 
 		// Aquired in chest in home area, 10% drop chance from slime
 	},
-	exampleItem: {
+	bluntsword: {
 		name: "Blunt Sword",
 		description: "More of a sharp mace",
 		visits: 0,
@@ -34,12 +34,13 @@ items = {
 			// Equip for +1 attack
 		},
 		onInspect: function() {
+			output('Could use a sharpening.');
 			// Could use a sharpening
 		}
 
 		// Aquired in home area
 	},
-	exampleItem: {
+	buckler: {
 		name: "Buckler",
 		description: "Doesnt Buckle, ironically",
 		visits: 0,
@@ -52,7 +53,7 @@ items = {
 
 		// Aquired in Guard Tower
 	},
-	exampleItem: {
+	gatekey: {
 		name: "Gate Key",
 		description: "Opens the Gate",
 		visits: 0,
@@ -65,7 +66,7 @@ items = {
 
 		// any other details you can provide, put them here
 	},
-	exampleItem: {
+	thiefblade: {
 		name: "Thief Blade",
 		description: "Favoured by Cutpurses",
 		visits: 0,

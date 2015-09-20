@@ -56,12 +56,19 @@ locations = {
 			y: 1
 		},
 		state: {
+			enemies: {
+				slime: {
+					type: 'slime'
+				}
+			},
 			creatureDefeated: false,
 			visits: 0,
 		},
 		onEnter: function() {
 			// Encounters strange creature, battle tutorial
-			output('A strange [slime] creature blocks your path. You\'re probably going to have to [battle] it.')
+			if (locations.dirtpath.state.creatureDefeated) {
+				output('A strange [slime] creature blocks your path. You\'re probably going to have to [battle] it.')
+			}
 		},
 		onLook: function() {
 			if (locations.dirtpath.state.creatureDefeated) {
