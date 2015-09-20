@@ -11,14 +11,14 @@ locations = {
 		onEnter: function() {
 			// write an explanation of what should happen when you arrive here, we'll make code for it later
 			output('welcome to debugville!');
-		}
+		},
 		onLook: function() {
 			// describe what the player would see if they were like "wtf is here"
 			output('console output, console output everywhere');
 		}
 
 		// any other details you can provide, put them here
-	}
+	},
 	home: {
 		name: "Home",
 		description: "Sweet Home",
@@ -30,11 +30,11 @@ locations = {
 		onEnter: function() {
 			// Beginning area, safe zone, chests, exit to dirt path. After a stormy night the character decides to check on his/her sister who lives on the other side of the city.
 			output('Home sweet home!');
-		}
+		},
 		onLook: function() {
-			output('You scan your home. There is a [chest] nearby, along with a [bed].');
+			output('You scan your home. There is a [chest] nearby, along with a [bed]. A [dirtpath] is visible through a south-facing window.');
 			// The character's home, a small shack on the edge of the city. There are chests with some basic equipment and survival items lying around and a place to rest to restore health/stamina.
-		}
+		},
 		staticItems: {
 			bed: {
 				name: "Bed",
@@ -47,13 +47,13 @@ locations = {
 		}
 
 		// Beginning area, leads to Dirt Path zone
-	}
+	},
 	dirtpath: {
 		name: "Dirt Path",
 		description: "Preferable to the broken glass path",
 		coordinates: {
-			x: 1,
-			y: 0
+			x: 0,
+			y: 1
 		},
 		state: {
 			creatureDefeated: false,
@@ -62,7 +62,7 @@ locations = {
 		onEnter: function() {
 			// Encounters strange creature, battle tutorial
 			output('A strange [slime] creature blocks your path. You\'re probably going to have to [battle] it.')
-		}
+		},
 		onLook: function() {
 			if (locations.dirtpath.state.creatureDefeated) {
 				output('Thick foliage covers either side of the path, but the way to the [citygate] is clear.');
@@ -73,54 +73,54 @@ locations = {
 		}
 
 		// Arrives from Home area, leads to City Gate.
-	}
+	},
 	citygate: {
-		name: "City Gate"
-		description: "A gate to the city"
+		name: "City Gate",
+		description: "A gate to the city",
 		coordinates: {
-			x: 1,
-			y: 1
+			x: 0,
+			y: 2
 		},
 		visits: 0,
 		onEnter: function() {
 			// Arrives to find the Gate Closed and the area deserted, requires key to enter city. 
 			output('You arrive at the gate, only to find the area deserted and the gate locked. You will probably need to source a [key] to gain access to the city.')
-		}
+		},
 		onLook: function() {
 			// The city walls loom ominously against the dark sky. Normally a bustling area with merchants and knights coming and going, it is all to quiet. A guard tower stands quietly to the right of the gate.
 			output('The city walls loom ominously against the dark sky. Normally a bustling area with merchants and knights coming and going, it is eerily quiet. A [guardtower] sits to the right of the gate.')
 		}
 
 		// Arrives from Dirt Path area. Leads to City Square (once gate key is aquired) and Guard Tower.
-	}
+	},
 	guardtower: {
-		name: "Guard Tower"
-		description: "Knee injuries not a problem!"
+		name: "Guard Tower",
+		description: "Knee injuries not a problem!",
 		coordinates: {
-			x: 0,
-			y: 0
+			x: 2,
+			y: 1
 		},
 		visits: 0,
 		onEnter: function() {
 			// As the character enters the tower something scurrys up the steps. What was that thing?
-		}
+		},
 		onLook: function() {
 			// With food on tables it's clear this place was occupied only recently. The armory is unfortunatly locked away but there's a chest on the far side of the room. There is also a staircase leading to the top of the tower.
 		}
 
 		// Arrives from City Gate, Leads to Guard Tower Roof area
-	}
-	guardtower-roof: {
-		name: "Guard tower Roof"
-		description: "Lovely view"
+	},
+	guardtowerroof: {
+		name: "Guard tower Roof",
+		description: "Lovely view",
 		coordinates: {
-			x: 0,
-			y: 0
+			x: 1,
+			y: 2
 		},
 		visits: 0,
 		onEnter: function() {
 			// As the character reaches the top of the tower the trapdoor slams behind him. From behind a crate a feral looking creature emerges. It has a set of keys around its neck.
-		}
+		},
 		onLook: function() {
 			// You can't see over the wall into the city, but you can almost see your house from here!
 		}
