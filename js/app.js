@@ -94,6 +94,9 @@ locations = {
 		onEnter: function() {
 			console.log('went outside house');
 			locations.outside.visits++
+		},
+		onLook: function() {
+			output('Fucking memes everywhere');
 		}
 	}
 }
